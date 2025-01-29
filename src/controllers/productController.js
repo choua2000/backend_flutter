@@ -66,14 +66,11 @@ const Controller = {
   // FindOne Product
   findProductById: async (req, res) => {
     try {
-      // const { id } = (req.params);
-      // if (!id) {
-      //   return res.status(400).json({ message: "PRODUCT ID IS REQUIRED" });
-      // }
-      const product = await serviceProduct.findProductById();
-
-      if (!product)
+      const { id } = (req.params);
+      const product = await serviceProduct.findProductById({_id:id});
+      if (!product){
         return res.status(404).json({ message: "PRODUCT NOT FOUND" });
+      }
       return res
         .status(200)
         .json({ message: "GET PRODUCT BY ID", product: product });
